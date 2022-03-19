@@ -1,15 +1,17 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import Banner from '../components/Banner';
-import { sanityClient, urlFor } from '../sanity';
-import { Post } from '../typings';
+import { sanityClient, urlFor } from "../sanity";
+import { Post } from "../typings";
 
 
 interface Props {
   posts: [Post];
 };
 
-export default function Home(props: Props) {
+export default function Home({ posts }: Props) {
+  console.log.posts;
+  
   return (
     <div className="max-w-7xl mx-auto">
       <Head>
