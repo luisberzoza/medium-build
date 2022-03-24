@@ -1,5 +1,5 @@
+import imageUrlBuilder from '@sanity/image-url';
 import {
-    createImageUrlBuilder,
     createCurrentUserHook,
     createClient,
 } from "next-sanity";
@@ -14,6 +14,6 @@ export const config = {
 
 export const sanityClient = createClient(config);
 
-export const urlFor = (source) => createImageUrlBuilder(cofig).image(source);
+export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
 export const useCurrentUser = createCurrentUserHook(config);
