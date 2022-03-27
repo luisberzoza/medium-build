@@ -1,4 +1,4 @@
-import imageUrlBuilder from '@sanity/image-url';
+import createImageUrlBuilder from '@sanity/image-url';
 import {
     createCurrentUserHook,
     createClient,
