@@ -1,9 +1,12 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import Header from '../components/Header';
 import Banner from '../components/Banner';
-import { sanityClient, urlFor } from "../sanity";
+import { sanityClient } from "../sanity";
+import { urlFor } from "../sanity";
+import imageUrlBuilder from '@sanity/image-url';
+import createImageUrlBuilder from '@sanity/image-url';
 import { Post } from "../typings";
-import Link from 'next/link';
 
 
 interface Props {
@@ -22,14 +25,13 @@ export default function Home({ posts }: Props) {
       <Banner />
       {/* Posts */}
       <div>
-        {posts.map(post => (
+        {posts.map((post) => (
           <Link key={post._id} href={`/post/${post.slug}`}>
             <div>
-              <h1>I am a post</h1>
-              <img src={urlFor(post.mainImage).url()!} alt=""/>
+              <img src={urlFor(post.mainImage).url()!} />
             </div>
           </Link>
-        ))}
+        ))};
       </div>
     </div>
   );
