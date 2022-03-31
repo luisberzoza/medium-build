@@ -23,16 +23,16 @@ export default function Home({ posts }: Props) {
       </Head>
       <Header />
       <Banner />
-      {/* Posts */}
       <div>
         {posts.map((post) => (
-          <Link key={post._id} href={`/post/${post.slug}`}>
+          <Link key={post._id} href={`/post/${post.slug.current}`}>
             <div>
               <img src={urlFor(post.mainImage).url()!} />
             </div>
           </Link>
         ))};
       </div>
+      
     </div>
   );
 }
