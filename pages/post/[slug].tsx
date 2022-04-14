@@ -9,10 +9,22 @@ interface Props {
 
 function Post({ post }: Props) {
     console.log(post);
-    
+
     return (
         <main>
             <Header />
+
+            <img className="w-full h-40 object-cover" src={urlFor(post.mainImage).url()!} alt=""></img>
+
+            <article className="max-w-3xl mx-auto p-5"> 
+                <h1 className="text-3xl mt-10 mb-3">{post.title}</h1>
+                <h2 className="text-xl font-light text-gray-500 mb-2">{post.description}</h2>
+
+                <div>
+                    <img src={urlFor(post.author.image).url()!} alt=""/>
+                </div>
+            </article>
+        
         </main>
     );
 }
@@ -66,13 +78,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     if (!post) {
         return {
             notFound: true
-        }
+        };
     }
 
     return {
         props: {
             post,
-        }
-    }
-
-}
+        },
+        revalidate: 60, // after 60 seconds the old cached version will be updated.
+    };
+};
