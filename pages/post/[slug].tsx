@@ -2,6 +2,7 @@ import { sanityClient, urlFor } from "../../sanity";
 import Header from "../../components/Header";
 import { GetStaticProps } from "next";
 import { Post } from "../../typings";
+import PortableText from "react-portable-text";
 
 interface Props {
     post: Post;
@@ -20,9 +21,20 @@ function Post({ post }: Props) {
                 <h1 className="text-3xl mt-10 mb-3">{post.title}</h1>
                 <h2 className="text-xl font-light text-gray-500 mb-2">{post.description}</h2>
 
-                <div>
-                    <img src={urlFor(post.author.image).url()!} alt=""/>
+                <div className="flex items-center space-x-2">
+                    <img className="h-10 w-10 rounded-full" src={urlFor(post.author.image).url()!} alt=""/>
+                    <p className="font-extralight text-sm">
+                        Blog post by <span className="text-green-600">{post.author.name}</span> - Published at {new Date(post._createdAt).toLocaleString()}
+                    </p>
                 </div>
+                <div>
+                    <PortableText
+                    dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
+                    projectId={process.env.NEXT_PUBLIC.SANITY.PROJECT.ID!}
+                    />
+                </div>
+
+
             </article>
         
         </main>
