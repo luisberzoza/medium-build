@@ -51,9 +51,23 @@ function Post({ post }: Props) {
                     }}
                     />
                 </div>
-
             </article>
-        
+
+            <hr className="max-w-large my-5 mx-auto border border-yellow-500"/>
+            <form>
+                <label>
+                    <span>Name</span>
+                    <input placeholder="Placeholder" type="text"/>
+                </label>
+                <label>
+                    <span>Name</span>
+                    <input placeholder="Placeholder" type="text"/>
+                </label>
+                <label>
+                    <span>Name</span>
+                    <input placeholder="Placeholder" type="text"/>
+                </label>
+            </form>
         </main>
     );
 }
