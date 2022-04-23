@@ -60,12 +60,12 @@ function Post({ post }: Props) {
                     <input placeholder="Placeholder" type="text"/>
                 </label>
                 <label>
-                    <span>Name</span>
+                    <span>Email</span>
                     <input placeholder="Placeholder" type="text"/>
                 </label>
                 <label>
-                    <span>Name</span>
-                    <input placeholder="Placeholder" type="text"/>
+                    <span>Comment</span>
+                    <input placeholder="Placeholder**" type="text"/>
                 </label>
             </form>
         </main>
