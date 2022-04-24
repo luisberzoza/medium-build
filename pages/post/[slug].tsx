@@ -3,13 +3,21 @@ import Header from "../../components/Header";
 import { GetStaticProps } from "next";
 import { Post } from "../../typings";
 import PortableText from "react-portable-text";
+import { useForm, SubmitHandler } from "react-hook-form";
 
+interface IFormInput {
+    _id: string;
+    name: string;
+    email: string;
+    comment: string;
+}
 interface Props {
     post: Post;
 }
 
 function Post({ post }: Props) {
-    console.log(post);
+
+    const { register, handleSubmit, formState: {errors} } = useForm<IFormInput>();
 
     return (
         <main>
@@ -23,7 +31,7 @@ function Post({ post }: Props) {
 
                 <div className="flex items-center space-x-2">
                     <img className="h-10 w-10 rounded-full" src={urlFor(post.author.image).url()!} alt=""/>
-                    <p className="font-extralight text-sm">
+                    <p className="font-light text-sm">
                         Blog post by <span className="text-green-600">{post.author.name}</span> - Published at {new Date(post._createdAt).toLocaleString()}
                     </p>
                 </div>
@@ -53,19 +61,35 @@ function Post({ post }: Props) {
                 </div>
             </article>
 
-            <hr className="max-w-large my-5 mx-auto border border-yellow-500"/>
-            <form>
-                <label>
-                    <span>Name</span>
-                    <input placeholder="Placeholder" type="text"/>
+            <hr className="max-w-lg my-5 mx-auto border border-yellow-500"/>
+            <form className="flex flex-col p-5 my-10 max-w-2xl mx-auto mb-10">
+                <h3 className="text-sm text-yellow-500">Enjoy this article </h3>
+                <h4 className="text-3xl font-bold">Leave a comment below!</h4>
+                <hr className="py-3 mt-2"/>
+
+                <input 
+                    {...register("_id")}
+                    type="hidden"
+                    name="_id"
+                    value={post._id}
+                />
+
+                <label className="block mb-5">
+                    <span className="text-gray-700">Name</span>
+                    <input 
+                        {...register("name", { required: true })}
+                        className="shadow border rounded py-2 px-3 form-input mt-1 block w-full ring-yellow-500 outline-none focus:ring" 
+                        placeholder="John Doe" 
+                        type="text" 
+                    />
                 </label>
-                <label>
-                    <span>Email</span>
-                    <input placeholder="Placeholder" type="text"/>
+                <label className="block mb-5">
+                    <span className="text-gray-700">Email</span>
+                    <input {...register("email", { required: true })} className="shadow border rounded py-2 px-3 form-input mt-1 block w-full ring-yellow-500 outline-none focus:ring" placeholder="EMAIL@email.com" type="text" />
                 </label>
-                <label>
-                    <span>Comment</span>
-                    <input placeholder="Placeholder**" type="text"/>
+                <label className="block mb-5">
+                    <span className="text-gray-700">Comment</span>
+                    <textarea {...register("comment", { required: true })} className="shadow border rounded py-2 px-3 form-textarea mt-1 block w-full ring-yellow-500 outline-none focus:ring"  placeholder="Comments**" rows={8}/>
                 </label>
             </form>
         </main>
