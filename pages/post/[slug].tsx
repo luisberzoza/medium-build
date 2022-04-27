@@ -91,6 +91,18 @@ function Post({ post }: Props) {
                     <span className="text-gray-700">Comment</span>
                     <textarea {...register("comment", { required: true })} className="shadow border rounded py-2 px-3 form-textarea mt-1 block w-full ring-yellow-500 outline-none focus:ring"  placeholder="Comments**" rows={8}/>
                 </label>
+
+                <div className="flex flex-col p-5">
+                    {errors.name  && (
+                        <span className="text-red-500">The Name Field is required</span>
+                    )}
+                    {errors.comment  && (
+                        <span className="text-red-500">The Comment Field is required</span>
+                    )}
+                    {errors.email  && (
+                        <span className="text-red-500">The Email Field is required</span>
+                    )}                    
+                </div>
             </form>
         </main>
     );
