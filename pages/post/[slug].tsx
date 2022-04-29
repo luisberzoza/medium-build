@@ -4,6 +4,7 @@ import { GetStaticProps } from "next";
 import { Post } from "../../typings";
 import PortableText from "react-portable-text";
 import { useForm, SubmitHandler } from "react-hook-form";
+import React, { useState } from 'react';
 
 interface IFormInput {
     _id: string;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 function Post({ post }: Props) {
+    const [submitted, setSubmitted] = useState(false);
 
     const { register, handleSubmit, formState: {errors} } = useForm<IFormInput>();
 
@@ -25,8 +27,10 @@ function Post({ post }: Props) {
             body: JSON.stringify(data),
         }).then(() => {
             console.log(data);
+            setSubmitted(true);
         }).catch((err) => {
             console.log(err);
+            setSubmitted(false);
         });
     };
 
@@ -74,7 +78,10 @@ function Post({ post }: Props) {
 
             <hr className="max-w-lg my-5 mx-auto border border-yellow-500"/>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-5 my-10 max-w-2xl mx-auto mb-10">
+            {submitted ? (
+                <h1>Submmited</h1>
+            ): (
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-5 my-10 max-w-2xl mx-auto mb-10">
                 <h3 className="text-sm text-yellow-500">Enjoy this article </h3>
                 <h4 className="text-3xl font-bold">Leave a comment below!</h4>
                 <hr className="py-3 mt-2"/>
@@ -117,6 +124,9 @@ function Post({ post }: Props) {
                 </div>
                 <input type="submit" className="shadow bg-yellow-500 hover:bg-yellow-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded cursor-pointer"/>
             </form>
+            )};
+
+            
         </main>
     );
 }

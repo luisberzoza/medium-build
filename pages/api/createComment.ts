@@ -19,8 +19,20 @@ export default async function createComment(
 
     try {
         await client.create({
-            
-        })
+            _type: 'comment',
+            post: {
+                _type: 'reference',
+                _ref: _id
+            },
+            name,
+            email,
+            comment
+        });
+    } catch (err) {
+        return res.status(500).json({ message: `couldn't submit comment`, err });
     }
-  res.status(200).json({ name: 'John Doe' })
+
+    console.log("Comment Submitted");
+    return res.status(200).json({ message: `Comment submitted` });
+
 }
