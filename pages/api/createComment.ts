@@ -18,7 +18,9 @@ export default async function createComment(
     const { _id, name, email, comment } = JSON.parse(req.body);
 
     try {
-        await
+        await client.create({
+            
+        })
     }
   res.status(200).json({ name: 'John Doe' })
 }
